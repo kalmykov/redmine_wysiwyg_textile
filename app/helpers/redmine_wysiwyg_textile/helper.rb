@@ -27,18 +27,35 @@ module RedmineWysiwygTextile
           javascript_include_tag('jstoolbar/jstoolbar') +
             javascript_include_tag('jstoolbar/textile') +
             javascript_include_tag("jstoolbar/lang/jstoolbar-#{current_language.to_s.downcase}") +
+            stylesheet_link_tag('jstoolbar') + 
           javascript_tag("var wikiToolbar = new jsToolBar($('#{field_id}')); wikiToolbar.setHelpLink('#{help_link}'); wikiToolbar.draw();")
     end
     
     def wikitoolbar_for_wysiwyg(field_id)
-       file = "#{Redmine::Utils.relative_url_root}/help/wiki_syntax.html"
-       help_link = l(:setting_text_formatting) + ': ' +
-       link_to(l(:label_help), file,
-              :onclick => "window.open(\"#{file}\", \"\", \"resizable=yes, location=no, width=800, height=640, menubar=no, status=no, scrollbars=yes\"); return false;")
-    # tinymce and jstoolbar
+         # set information for deafult editor 
+        if (DefaultEditorUserSetting.find_or_create_editor_by_user_id(User.current.id).editor == '__wysiwyg__')
+            js = "javascript:toggleEditor('wysiwyg',1);"
+            html = "form>
+                <Input type = radio Name = \"textilewysiwyg\"  onClick=\"javascript:toggleEditor('#{field_id}',0)\">textile
+                <Input type = radio Name = \"textilewysiwyg\" CHECKED onClick=\"javascript:toggleEditor('#{field_id}',1)\">wysiwyg
+                </form"
+        else
+          js ="" 
+          html = "form>
+              <Input type = radio Name = \"textilewysiwyg\" CHECKED onClick=\"javascript:toggleEditor('#{field_id}',0)\">textile
+              <Input type = radio Name = \"textilewysiwyg\"  onClick=\"javascript:toggleEditor('#{field_id}',1)\">wysiwyg
+              </form"
+        end
+        file = "#{Redmine::Utils.relative_url_root}/help/wiki_syntax.html"
+        help_link = l(:setting_text_formatting) + ': ' +
+        link_to(l(:label_help), file,
+                :onclick => "window.open(\"#{file}\", \"\", \"resizable=yes, location=no, width=800, height=640, menubar=no, status=no, scrollbars=yes\"); return false;")
+        # tinymce and jstoolbar
         javascript_include_tag('jstoolbar/jstoolbar') +
         javascript_include_tag('jstoolbar/textile') +
         javascript_include_tag("jstoolbar/lang/jstoolbar-#{current_language.to_s.downcase}") +
+        stylesheet_link_tag('jstoolbar')+
+        javascript_include_tag('save_shortcut.js', :plugin => 'redmine_wysiwyg_textile') +
         javascript_include_tag('/tinymce/jscripts/tiny_mce/tiny_mce.js', :plugin => 'redmine_wysiwyg_textile') +
         javascript_tag("
             var tinyenabled=false;
@@ -49,8 +66,10 @@ module RedmineWysiwygTextile
                formats : {strikethrough : {inline : 'del'}, 
                           underline : {inline : 'ins'} },
                theme : 'advanced',
-               plugins : 'table',
+               content_css : '/stylesheets/scm.css',
+               plugins : 'table, print, noneditable',
                theme_advanced_buttons1: 'bold,italic,underline,strikethrough,|,justifyleft,justifycenter,justifyright,justifyfull,|,formatselect',
+               theme_advanced_buttons2_add: 'print',
                theme_advanced_buttons3_add : 'tablecontrols',
                table_styles : 'Header 1=header1;Header 2=header2;Header 3=header3',
                table_cell_styles : 'Header 1=header1;Header 2=header2;Header 3=header3;Table Cell=tableCel1',
@@ -61,7 +80,7 @@ module RedmineWysiwygTextile
                theme_advanced_toolbar_location : 'top',
                theme_advanced_toolbar_align : 'left',
                theme_advanced_resizing : true
-              });
+              });   
             }
             function toggleEditor(id,DisplayTiny) {
                 if (DisplayTiny==1 && tinyenabled==false) {
@@ -70,14 +89,16 @@ module RedmineWysiwygTextile
                   tinyenabled=true;
                   the_jstoolbar.toolbar.style.display = 'none';
                   PreviewElem.onclick=function(){ UpdatePreviewHtml(); }
+                  setTimeout('setupSaveShortcut()',1500);
                   return;
                 }
-                if (!tinyMCE.get(id)) {
+                else if (!tinyMCE.get(id)) {
                   if (DisplayTiny==1) {
                      new Ajax.Request('/convert/wysiwygtotextiletohtml', {asynchronous:false, evalScripts:false, method:'post', onSuccess:function(request){UpdateFile(request)}, parameters:$('#{field_id}').serialize()});
                      the_jstoolbar.toolbar.style.display = 'none';
                      tinyMCE.execCommand('mceAddControl', false, id);
                      PreviewElem.onclick=function(){ UpdatePreviewHtml(); }
+                     setTimeout('setupSaveShortcut()',1500);
                   }
                 }
                 else {
@@ -159,13 +180,9 @@ module RedmineWysiwygTextile
                    }
                 } while (elem);
            }
-          ") +
-         "<form>
-            <Input type = radio Name = \"textilewysiwyg\" CHECKED onClick=\"javascript:toggleEditor('#{field_id}',0)\">textile
-            <Input type = radio Name = \"textilewysiwyg\" onClick=\"javascript:toggleEditor('#{field_id}',1)\">wysiwyg
-            </form>
-            <div id='workarea' class='wiki'></div>" +
-            javascript_tag("var the_jstoolbar = new jsToolBar($('#{field_id}')); the_jstoolbar.setHelpLink('#{help_link}'); the_jstoolbar.draw();GetPreviewFunction('#{field_id}');AddWikiformSubmit('#{field_id}');")
+          ") + tag(html) +
+            javascript_tag("var the_jstoolbar = new jsToolBar($('#{field_id}')); the_jstoolbar.setHelpLink('#{help_link}'); the_jstoolbar.draw();GetPreviewFunction('#{field_id}');AddWikiformSubmit('#{field_id}');") +
+            javascript_tag(js)
     end
     
     def initial_page_content(page)

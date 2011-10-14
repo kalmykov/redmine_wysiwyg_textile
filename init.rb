@@ -4,6 +4,10 @@
 # P.J.Lawrence October 2010
 #
 require 'redmine'
+require 'default_editor_my_account_hooks'
+require 'default_editor_user_patch'
+require 'hpricot'
+require 'undress/textile'
 
 RAILS_DEFAULT_LOGGER.info 'Starting Wysiwyg Textile for Redmine'
 
