@@ -1,3 +1,6 @@
+#
+# Alexey Kalmykov 2011
+#
 class UserPreference < ActiveRecord::Base
 
   def editor
