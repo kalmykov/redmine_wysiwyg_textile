@@ -1,3 +1,6 @@
+#
+# Source  code of undress gem
+#
 module Undress
   # Grammars give you a DSL to declare how to convert an HTML document into a
   # different markup language.
