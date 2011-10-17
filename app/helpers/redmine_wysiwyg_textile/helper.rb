@@ -3,7 +3,7 @@
 #
 # P.J.Lawrence October 2010
 #
-# Alexey Kalmykov, Dmitry Belokurov 2011
+# Alexey Kalmykov (alexey.kalmykov@lanit-tercom.com), Dmitry Belokurov(dmitry.belokurov@lanit-tercom.com), Lanit-Tercom, Inc,
 #
 module RedmineWysiwygTextile
   module Helper
