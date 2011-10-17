@@ -1,3 +1,6 @@
+#
+# Based on undress gem source . Corrections by Alexey Kalmyjov 2011
+#
 require File.expand_path(File.dirname(__FILE__) + "/../undress")
 
 module Undress
