@@ -1,3 +1,6 @@
+#
+# Alexey Kalmykov 2011
+#
 class DefaultEditorMyAccountHooks < Redmine::Hook::ViewListener
 
   include ApplicationHelper
