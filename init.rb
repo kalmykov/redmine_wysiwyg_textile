@@ -3,6 +3,8 @@
 #
 # P.J.Lawrence October 2010
 #
+# Alexey Kalmykov 2011
+#
 require 'redmine'
 require 'default_editor_my_account_hooks'
 require 'default_editor_user_patch'
