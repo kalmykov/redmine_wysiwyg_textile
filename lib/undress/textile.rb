@@ -1,5 +1,5 @@
 #
-# Based on undress gem source . Corrections by Alexey Kalmyjov 2011
+# Based on undress gem source . Corrections by Alexey Kalmykov (alexey.kalmykov@lanit-tercom.com), Lanit-Tercom, Inc
 #
 require File.expand_path(File.dirname(__FILE__) + "/../undress")
 
