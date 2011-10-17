@@ -1,3 +1,6 @@
+#
+# Source code from undress gem
+#
 require "hpricot"
 
 module ::Hpricot #:nodoc:
