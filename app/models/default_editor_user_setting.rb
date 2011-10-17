@@ -1,3 +1,6 @@
+#
+# Alexey Kalmykov 2011
+#
 class DefaultEditorUserSetting < ActiveRecord::Base
   unloadable
   belongs_to :user
