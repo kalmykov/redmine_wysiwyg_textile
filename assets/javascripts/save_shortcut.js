@@ -1,3 +1,6 @@
+//
+// Dmitry Belokurov 2011
+//
 // Finds out user agent
 var userAgent = navigator.userAgent.toLowerCase();
 var isIE = (userAgent.indexOf("msie") != -1 && userAgent.indexOf("opera") == -1);
