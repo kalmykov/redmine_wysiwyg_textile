@@ -3,6 +3,8 @@
 #
 # P.J.Lawrence October 2010
 #
+# Alexey Kalmykov, Dmitry Belokurov 2011
+#
 module RedmineWysiwygTextile
   module Helper
     unloadable
