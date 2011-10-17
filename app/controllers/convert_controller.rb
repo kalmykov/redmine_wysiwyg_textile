@@ -2,6 +2,7 @@ require 'redcloth3'
 require 'undress/textile'
 
 # P.J.Lawrence October 2010
+# Alexey Kalmykov 2011
 
 class HTMLFormatter< RedCloth3
         include ActionView::Helpers::TagHelper
