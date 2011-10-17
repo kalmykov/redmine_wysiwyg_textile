@@ -32,6 +32,6 @@ History
 
 14 Oct 2010 - v0.14 - removed P. from html to textile, replaced with just a return (\n)
 
-14 Oct 2011 - v0.15 - Added default editor option. Many changes in convertation : added support for all redmine textile tags. Author: Alexey Kalmykov
+14 Oct 2011 - v0.15 - Added default editor option. Many changes in convertation : added support for all redmine textile tags. Author: Alexey Kalmykov (alexey.kalmykov@lanit-tercom.com), Lanit-Tercom, Inc
 
     
