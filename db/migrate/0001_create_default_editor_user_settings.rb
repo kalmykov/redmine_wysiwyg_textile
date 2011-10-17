@@ -1,3 +1,6 @@
+#
+# Alexey Kalmykov 2011
+#
 class CreateDefaultEditorUserSettings < ActiveRecord::Migration
   def self.up
     create_table :default_editor_user_settings do |t|
