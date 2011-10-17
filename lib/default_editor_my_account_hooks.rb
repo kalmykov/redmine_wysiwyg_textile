@@ -1,5 +1,5 @@
 #
-# Alexey Kalmykov 2011
+# Alexey Kalmykov (alexey.kalmykov@lanit-tercom.com), Lanit-Tercom, Inc
 #
 class DefaultEditorMyAccountHooks < Redmine::Hook::ViewListener
 
