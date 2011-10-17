@@ -1,5 +1,5 @@
 //
-// Dmitry Belokurov 2011
+// Dmitry Belokurov (dmitry.belokurov@lanit-tercom.com), Lanit-Tercom, Inc
 //
 // Finds out user agent
 var userAgent = navigator.userAgent.toLowerCase();
