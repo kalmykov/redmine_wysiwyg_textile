@@ -1,3 +1,6 @@
+#
+# Source code form undress gem
+#
 require File.expand_path(File.dirname(__FILE__) + "/hpricot_ext")
 require File.expand_path(File.dirname(__FILE__) + "/core_ext/object")
 require File.expand_path(File.dirname(__FILE__) + "/undress/grammar")
